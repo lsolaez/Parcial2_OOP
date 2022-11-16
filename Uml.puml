@@ -1,0 +1,66 @@
+@startuml
+
+    Class ParkingLot{
+    get_floor()
+    update_floor()
+    get_floor_index()
+    Update_floor_index()
+    }
+
+    Class ParkingFloor{
+    floor_num:int
+    num_of_spots:int
+    spot_index
+    get_floor_num()
+    get_spot()
+    update_spots()
+    is_full()
+    }
+
+    ParkingFloor "*"*--"1" ParkingLot
+
+    Class ParkingSpot{
+    spot_num:int
+    get_is_taken()
+    update_is_taken()
+    get_spot_num()
+    get_vehicle()
+    update_vehicle()
+    }
+
+    ParkingSpot "*"*--"1" ParkingFloor
+
+    Abstract Class Vehicle{
+    registration_num
+    vehicle_type
+
+    get_registration_num()
+    get_vehicle_type()
+    }
+
+    Class SUV
+    Class Van
+    Class Compact
+
+    SUV--|>Vehicle
+    Van--|>Vehicle
+    Compact--|>Vehicle
+
+    Vehicle"1"---"1"ParkingSpot
+
+    Class Ticket{
+    parked_at:datetime
+    get_parked_at()
+    }
+    Vehicle"1"*--"1" Ticket
+
+    Class ParkingLotController{
+    add_floor()
+    get_available_floor()
+    park()
+    unpark()
+    }
+
+    ParkingLotController*--ParkingLot
+
+@enduml
